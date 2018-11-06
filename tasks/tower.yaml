@@ -1,0 +1,3 @@
+- name: "tower: load"
+  include_vars:
+    file: "config/tower.yaml"

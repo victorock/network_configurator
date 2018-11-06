@@ -1,0 +1,4 @@
+tower:
+  host: localhost
+  username: admin
+  password: admin

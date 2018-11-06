@@ -5,10 +5,10 @@ default_organization: Default
 default_description: This is Default Inventory Network Nodes!
 default_group_description: This is Default Group description.
 default_host_description: This is Default Host description.
-tower_vault_host: an-tower-01.ansible.eng.rdu2.redhat.com
-tower_vault_password: ansible
-tower_vault_username: sjaiswal
-variables:
+default_tower_host: localhost
+default_tower_password: admin
+default_tower_username: admin
+default_variables:
   default:
     ansible_become: yes
     ansible_become_method: enable
@@ -18,3 +18,9 @@ variables:
   ios:
     ansible_network_os: ios
     ansible_network_provider: ansible-network.cisco_ios
+  iosxr:
+    ansible_network_os: iosxr
+    ansible_network_provider: ansible-network.cisco_iosxr
+  junos:
+    ansible_network_os: junos
+    ansible_network_provider: ansible-network.juniper_junos

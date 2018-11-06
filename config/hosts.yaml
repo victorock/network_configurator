@@ -1,0 +1,5 @@
+hosts:
+  - name: eos_01
+    variables:
+      ansible_host: 1.2.3.4
+      ansible_network_os: eos
