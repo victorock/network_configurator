@@ -19,3 +19,18 @@
   loop: "{{ projects }}"
   loop_control:
     loop_var: project
+
+- name: Configure and Tag project to Default Team's account with permission privilege
+  tower_role:
+    tower_host: "{{ tower.host }}"
+    tower_password: "{{ tower.password }}"
+    tower_username: "{{ tower.username }}"
+    job_template: "{{ tower_role_job_template.0.name }}"
+    state: "{{ tower_role_job_template.0.state | default(omit) }}"
+    team: "{{ tower_role_job_template.1.name }}"
+    role: "{{ tower_role_job_template.1.permission }}"
+    with_nested: 
+      - "{{ projects }}"
+      - "{{ default_teams }}"
+  loop_control:
+    loop_var: tower_role_job_template

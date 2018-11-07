@@ -1,8 +1,4 @@
 ---
-#- name: "Validate role spec"
-#  validate_role_spec:
-#    name: lalalal
-
 - name: Create Inventory
   tower_inventory:
     tower_host: "{{ tower.host | default(default_tower_host, true) }}"
@@ -13,20 +9,6 @@
     description: "{{ inventory.description | default(default_description, true) }}"
     variables: "{{ inventory.variables | default(default_variables, true) }}"
     state: "{{ inventory.state | default(omit, true) }}"
-
-- name: Create Group
-  tower_group:
-    tower_host: "{{ tower.host | default(default_tower_host, true) }}"
-    tower_password: "{{ tower.password | default(default_tower_password, true) }}"
-    tower_username: "{{ tower.username | default(default_tower_username, true) }}"
-    inventory: "{{ inventory.name | default(default_inventory) }}"
-    name: "{{ group.name }}"
-    description: "{{ group.description | default(default_group_description) }}"
-    variables: "{{ group.variables }}"
-    state: "{{ group.state | default(omit) }}"
-  loop: "{{ inventory.groups | default([]) }}"
-  loop_control:
-    loop_var: group
 
 - name: Create Host
   tower_host:
@@ -41,3 +23,17 @@
   loop: "{{ hosts | default([]) }}"
   loop_control:
     loop_var: host
+
+- name: Create Group
+  tower_group:
+    tower_host: "{{ tower.host | default(default_tower_host, true) }}"
+    tower_password: "{{ tower.password | default(default_tower_password, true) }}"
+    tower_username: "{{ tower.username | default(default_tower_username, true) }}"
+    inventory: "{{ inventory.name | default(default_inventory) }}"
+    name: "{{ group.name }}"
+    description: "{{ group.description | default(default_group_description) }}"
+    variables: "{{ group.variables }}"
+    state: "{{ group.state | default(omit) }}"
+  loop: "{{ inventory.groups | default([]) }}"
+  loop_control:
+    loop_var: group
